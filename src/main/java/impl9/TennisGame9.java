@@ -17,14 +17,14 @@ public class TennisGame9 implements TennisGame{
 
     State currentState;
 
-    public TennisGame9(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
-        allState = new AllState(player1, player2, this);
-        scoreState = new ScoreState(player1, player2, this);
-        deuceState = new DeuceState(player1, player2, this);
-        advantageState = new AdvantageState(player1, player2, this);
-        victoryState = new VictoryState(player1, player2, this);
+    public TennisGame9(String player1, String player2) {
+        this.player1 = new Player(player1);
+        this.player2 = new Player(player2);
+        allState = new AllState(this.player1, this.player2, this);
+        scoreState = new ScoreState(this.player1, this.player2, this);
+        deuceState = new DeuceState(this.player1, this.player2, this);
+        advantageState = new AdvantageState(this.player1, this.player2, this);
+        victoryState = new VictoryState(this.player1, this.player2, this);
 
         currentState = allState;
     }
@@ -86,6 +86,6 @@ public class TennisGame9 implements TennisGame{
 
     @Override
     public String getScore() {
-        return "";
+        return currentState.getScore();
     }
 }
