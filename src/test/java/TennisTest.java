@@ -1,3 +1,4 @@
+import impl9.TennisGame9;
 import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.stream.Stream;
@@ -61,6 +62,17 @@ public class    TennisTest {
         assertEquals(expectedScore, game.getScore());
     }
 
+    private static void checkAllScores(int player1Points, int player2Points, String expectedScore, impl9.TennisGame game) {
+        int highestScore = Math.max(player1Points, player2Points);
+        for (int i = 0; i < highestScore; i++) {
+            if (i < player1Points)
+                game.wonPoint("player1");
+            if (i < player2Points)
+                game.wonPoint("player2");
+        }
+        assertEquals(expectedScore, game.getScore());
+    }
+
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame1(int player1Points, int player2Points, String expectedScore) {
@@ -110,4 +122,12 @@ public class    TennisTest {
         TennisGame game = new TennisGame7("player1", "player2");
         checkAllScores(player1Points, player2Points, "Current score: " + expectedScore + ", enjoy your game!", game);
     }
+
+    @ParameterizedTest
+    @MethodSource("getAllScores")
+    public void checkAllScoresTennisGame9(int player1Points, int player2Points, String expectedScore) {
+        impl9.TennisGame game = new TennisGame9("player1", "player2");
+        checkAllScores(player1Points, player2Points, expectedScore, game);
+    }
+
 }
